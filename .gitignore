@@ -1,0 +1,145 @@
+# ============================================
+# ARCHIVOS SENSIBLES - NUNCA SUBIR A GIT
+# ============================================
+.env
+*.env
+.env.*
+credentials.json
+aws_credentials.txt
+*access_key*
+*secret_key*
+
+# ============================================
+# PYTHON
+# ============================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+virtualenv/
+.Python
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# ============================================
+# REFLEX ESPECÍFICO
+# ============================================
+.web/
+__reflex__/
+*.db
+*.db-shm
+*.db-wal
+
+# ============================================
+# AWS
+# ============================================
+# Archivos de configuración AWS locales
+.aws/
+aws-config/
+*.pem
+*.key
+
+# ============================================
+# SISTEMA OPERATIVO
+# ============================================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# ============================================
+# IDEs
+# ============================================
+# VSCode
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ============================================
+# LOGS Y TEMPORALES
+# ============================================
+*.log
+logs/
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# ============================================
+# REPORTES DE PRUEBA
+# ============================================
+reporte_pruebas_roles.html
+test_*.txt
+
+# ============================================
+# NODE (si usas npm para assets)
+# ============================================
+node_modules/
+package-lock.json
