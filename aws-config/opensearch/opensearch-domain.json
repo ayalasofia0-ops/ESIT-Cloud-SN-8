@@ -1,0 +1,33 @@
+{
+    "DomainName": "cndd-opensearch",
+    "EngineVersion": "OpenSearch_2.11",
+    "ClusterConfig": {
+        "InstanceType": "t3.small.search",
+        "InstanceCount": 1,
+        "DedicatedMasterEnabled": false,
+        "ZoneAwarenessEnabled": false
+    },
+    "EBSOptions": {
+        "EBSEnabled": true,
+        "VolumeType": "gp3",
+        "VolumeSize": 10
+    },
+    "AccessPolicies": "{\"Version\": \"2012-10-17\", \"Statement\": [{\"Effect\": \"Allow\", \"Principal\": {\"AWS\": \"*\"}, \"Action\": \"es:*\", \"Resource\": \"arn:aws:es:us-east-2:430374710014:domain/cndd-opensearch/*\"}]}",
+    "EncryptionAtRestOptions": {
+        "Enabled": true
+    },
+    "NodeToNodeEncryptionOptions": {
+        "Enabled": true
+    },
+    "DomainEndpointOptions": {
+        "EnforceHTTPS": true
+    },
+    "AdvancedSecurityOptions": {
+        "Enabled": true,
+        "InternalUserDatabaseEnabled": true,
+        "MasterUserOptions": {
+            "MasterUserName": "admin",
+            "MasterUserPassword": "Admin123!"
+        }
+    }
+}

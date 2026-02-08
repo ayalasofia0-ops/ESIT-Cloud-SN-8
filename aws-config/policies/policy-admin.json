@@ -1,0 +1,41 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ListarTodosLosBuckets",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListAllMyBuckets",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "AccesoCompletoS3",
+            "Effect": "Allow",
+            "Action": [
+                "s3:*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::cndd-publica",
+                "arn:aws:s3:::cndd-publica/*",
+                "arn:aws:s3:::cndd-proyectos",
+                "arn:aws:s3:::cndd-proyectos/*",
+                "arn:aws:s3:::cndd-recursoshumanos",
+                "arn:aws:s3:::cndd-recursoshumanos/*",
+                "arn:aws:s3:::cndd-logs",
+                "arn:aws:s3:::cndd-logs/*"
+            ]
+        },
+        {
+            "Sid": "VerLogs",
+            "Effect": "Allow",
+            "Action": [
+                "logs:DescribeLogGroups",
+                "logs:DescribeLogStreams",
+                "logs:GetLogEvents"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

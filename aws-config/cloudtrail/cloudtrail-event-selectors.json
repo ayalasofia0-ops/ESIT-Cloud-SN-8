@@ -1,0 +1,19 @@
+{
+    "TrailName": "CNDD-Trail",
+    "EventSelectors": [
+        {
+            "ReadWriteType": "All",
+            "IncludeManagementEvents": true,
+            "DataResources": [
+                {
+                    "Type": "AWS::S3::Object",
+                    "Values": [
+                        "arn:aws:s3:::cndd-publica/*",
+                        "arn:aws:s3:::cndd-proyectos/*",
+                        "arn:aws:s3:::cndd-recursoshumanos/*"
+                    ]
+                }
+            ]
+        }
+    ]
+}

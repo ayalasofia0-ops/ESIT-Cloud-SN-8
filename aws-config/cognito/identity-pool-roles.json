@@ -1,0 +1,12 @@
+{
+    "IdentityPoolId": "us-east-2:bc3f7d1d-8656-4580-8a9f-2aff3da4c3da",
+    "Roles": {
+        "authenticated": "arn:aws:iam::430374710014:role/Cognito-LecturaEscritura"
+    },
+    "RoleMappings": {
+        "cognito-idp.us-east-2.amazonaws.com/us-east-2_K7P0oSbDg:5n8106brar4aa4n8iqbi4ttegr": {
+            "Type": "Token",
+            "AmbiguousRoleResolution": "Deny"
+        }
+    }
+}

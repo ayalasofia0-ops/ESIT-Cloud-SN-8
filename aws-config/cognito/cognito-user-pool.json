@@ -1,0 +1,43 @@
+{
+    "PoolName": "CNDD-UserPool",
+    "Policies": {
+        "PasswordPolicy": {
+            "MinimumLength": 8,
+            "RequireUppercase": true,
+            "RequireLowercase": true,
+            "RequireNumbers": true,
+            "RequireSymbols": false
+        }
+    },
+    "AutoVerifiedAttributes": [
+        "email"
+    ],
+    "UsernameAttributes": [
+        "email"
+    ],
+    "UsernameConfiguration": {
+        "CaseSensitive": false
+    },
+    "Schema": [
+        {
+            "Name": "email",
+            "AttributeDataType": "String",
+            "Required": true,
+            "Mutable": true
+        },
+        {
+            "Name": "name",
+            "AttributeDataType": "String",
+            "Required": true,
+            "Mutable": true
+        }
+    ],
+    "AccountRecoverySetting": {
+        "RecoveryMechanisms": [
+            {
+                "Priority": 1,
+                "Name": "verified_email"
+            }
+        ]
+    }
+}

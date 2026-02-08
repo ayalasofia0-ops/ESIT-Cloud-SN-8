@@ -1,0 +1,6 @@
+{
+    "LoggingEnabled": {
+        "TargetBucket": "cndd-logs",
+        "TargetPrefix": "logs-publica/"
+    }
+}

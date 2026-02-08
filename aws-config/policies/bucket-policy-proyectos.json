@@ -1,0 +1,42 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "RequireSecureTransport",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::cndd-proyectos",
+                "arn:aws:s3:::cndd-proyectos/*"
+            ],
+            "Condition": {
+                "Bool": {
+                    "aws:SecureTransport": "false"
+                }
+            }
+        },
+        {
+            "Sid": "AllowAuthenticatedAccess",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:DeleteObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::cndd-proyectos",
+                "arn:aws:s3:::cndd-proyectos/*"
+            ],
+            "Condition": {
+                "StringLike": {
+                    "aws:userid": "arn:aws:sts::430374710014:assumed-role/Cognito-*"
+                }
+            }
+        }
+    ]
+}

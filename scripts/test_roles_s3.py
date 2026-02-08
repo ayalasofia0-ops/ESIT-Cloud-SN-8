@@ -309,10 +309,11 @@ def generar_reporte(todos_resultados):
     </html>
     """
     
-    with open('reporte_pruebas_roles.html', 'w', encoding='utf-8') as f:
+    # En la función generar_reporte(), cambiar:
+    with open('tests/results/reporte_pruebas_roles.html', 'w', encoding='utf-8') as f:
         f.write(html)
-    
-    print(f"\n✓ Reporte HTML generado: reporte_pruebas_roles.html")
+
+print(f"\n✓ Reporte HTML generado: tests/results/reporte_pruebas_roles.html")
 
 
 def main():

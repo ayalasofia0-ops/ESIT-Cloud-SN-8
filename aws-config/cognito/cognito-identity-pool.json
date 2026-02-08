@@ -1,0 +1,11 @@
+{
+    "IdentityPoolName": "CNDD_IdentityPool",
+    "AllowUnauthenticatedIdentities": false,
+    "CognitoIdentityProviders": [
+        {
+            "ProviderName": "cognito-idp.us-east-2.amazonaws.com/us-east-2_K7P0oSbDg",
+            "ClientId": "5n8106brar4aa4n8iqbi4ttegr",
+            "ServerSideTokenCheck": false
+        }
+    ]
+}

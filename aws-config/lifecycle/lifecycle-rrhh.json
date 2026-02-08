@@ -1,0 +1,34 @@
+{
+    "Rules": [
+        {
+            "ID": "TransicionAlmacenamientoRRHH",
+            "Status": "Enabled",
+            "Filter": {
+                "Prefix": ""
+            },
+            "Transitions": [
+                {
+                    "Days": 60,
+                    "StorageClass": "STANDARD_IA"
+                },
+                {
+                    "Days": 180,
+                    "StorageClass": "GLACIER_IR"
+                }
+            ]
+        },
+        {
+            "ID": "LimpiezaVersionesAntiguas",
+            "Status": "Enabled",
+            "Filter": {
+                "Prefix": ""
+            },
+            "NoncurrentVersionExpiration": {
+                "NoncurrentDays": 90
+            },
+            "Expiration": {
+                "ExpiredObjectDeleteMarker": true
+            }
+        }
+    ]
+}

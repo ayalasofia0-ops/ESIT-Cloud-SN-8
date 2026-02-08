@@ -81,9 +81,8 @@ __reflex__/
 # ============================================
 # AWS
 # ============================================
-# Archivos de configuración AWS locales
+# Solo archivos de credenciales AWS locales (NO configuraciones del proyecto)
 .aws/
-aws-config/
 *.pem
 *.key
 
