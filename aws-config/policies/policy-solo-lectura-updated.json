@@ -1,0 +1,32 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ListarBuckets",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListAllMyBuckets",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "SoloLectura",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetObjectAttributes",
+                "s3:GetObjectMetadata",
+                "s3:HeadObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::cndd-publica",
+                "arn:aws:s3:::cndd-publica/*",
+                "arn:aws:s3:::cndd-proyectos",
+                "arn:aws:s3:::cndd-proyectos/*",
+                "arn:aws:s3:::cndd-recursoshumanos",
+                "arn:aws:s3:::cndd-recursoshumanos/*"
+            ]
+        }
+    ]
+}
