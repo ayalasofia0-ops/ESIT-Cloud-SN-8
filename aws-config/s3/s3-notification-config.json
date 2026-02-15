@@ -1,0 +1,19 @@
+{
+    "LambdaFunctionConfigurations": [
+        {
+            "Id": "CloudTrailLogsToLambda",
+            "LambdaFunctionArn": "arn:aws:lambda:us-east-2:430374710014:function:CloudTrail-To-OpenSearch",
+            "Events": ["s3:ObjectCreated:*"],
+            "Filter": {
+                "Key": {
+                    "FilterRules": [
+                        {
+                            "Name": "suffix",
+                            "Value": ".gz"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

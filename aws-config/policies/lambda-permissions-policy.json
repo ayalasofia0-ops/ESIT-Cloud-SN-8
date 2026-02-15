@@ -1,0 +1,32 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "LeerS3CloudTrail",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": "arn:aws:s3:::cndd-cloudtrail-logs/*"
+        },
+        {
+            "Sid": "EscribirOpenSearch",
+            "Effect": "Allow",
+            "Action": [
+                "es:ESHttpPost",
+                "es:ESHttpPut"
+            ],
+            "Resource": "arn:aws:es:us-east-2:430374710014:domain/cndd-opensearch/*"
+        },
+        {
+            "Sid": "CloudWatchLogs",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:us-east-2:430374710014:*"
+        }
+    ]
+}

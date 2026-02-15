@@ -87,6 +87,30 @@ __reflex__/
 *.key
 
 # ============================================
+# ARCHIVOS TEMPORALES DEL PROYECTO
+# ============================================
+# Carpeta temp completa
+temp/
+lambda-package/
+
+# Archivos de prueba
+test.txt
+test-*.txt
+version-test.txt
+carga-test.txt
+admin.txt
+lec-esc.txt
+descargado.txt
+downloaded.bin
+*.bin
+
+# Paquetes Lambda
+cloudtrail_to_opensearch.zip
+
+# Reportes de prueba temporales
+reporte_pruebas_roles.html
+
+# ============================================
 # SISTEMA OPERATIVO
 # ============================================
 # Windows
@@ -132,13 +156,18 @@ logs/
 *~
 
 # ============================================
-# REPORTES DE PRUEBA
-# ============================================
-reporte_pruebas_roles.html
-test_*.txt
-
-# ============================================
 # NODE (si usas npm para assets)
 # ============================================
 node_modules/
 package-lock.json
+
+# ============================================
+# ARCHIVOS ESPECÍFICOS A IGNORAR
+# ============================================
+# Scripts antiguos/obsoletos
+setup-aws-profiles.ps1
+
+# Configuraciones duplicadas o temporales
+*-updated.json
+*-fixed.json
+*-backup.json
