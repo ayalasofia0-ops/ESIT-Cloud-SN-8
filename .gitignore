@@ -1,3 +1,6 @@
+.states
+.web
+assets/external/
 # ============================================
 # ARCHIVOS SENSIBLES - NUNCA SUBIR A GIT
 # ============================================
