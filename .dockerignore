@@ -1,0 +1,46 @@
+#Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+#Entornos Virtuales
+.venv/
+venv/
+esit/
+env/
+
+#Reflex
+.web/
+.reflex/
+node_modules/
+
+#Git
+.git
+.gitignore
+
+#Configuracion local
+.env
+.env.local
+
+#Documentacion
+docs/
+scripts/
+tests/
+*.md
+
+#temporales
+assests/uploaded_files/
+temp/
+tmp/
+
+#IDE
+.vscode/
+.idea/
+

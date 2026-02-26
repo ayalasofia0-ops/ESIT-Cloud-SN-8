@@ -54,10 +54,6 @@ class CognitoAuth:
             # Obtener info del usuario y sus grupos
             user_info = self.get_user_info(access_token)
             groups = self.get_user_groups(username)
-
-            # DEBUG - Ver qué contiene user_info
-            print(f"DEBUG Cognito - user_info completo: {user_info}")
-            print(f"DEBUG Cognito - user_info['attributes']: {user_info.get('attributes', {})}")
             
             # Validar que el usuario tenga un grupo asignado
             if not groups:
@@ -69,19 +65,10 @@ class CognitoAuth:
             # Extraer el nombre del usuario (si existe)
             user_name = user_info.get('attributes', {}).get('name', '')
             
-            # DEBUG - Ver extracción del nombre
-            print(f"DEBUG Cognito - Atributo 'name' en attributes: '{user_info.get('attributes', {}).get('name', 'NO ENCONTRADO')}'")
-            print(f"DEBUG Cognito - user_name extraído: '{user_name}'")
-            
             if not user_name:
                 # Si no tiene nombre, usar el email
                 user_name = username
-                print(f"DEBUG Cognito - No había nombre, usando email: '{user_name}'")
 
-            #Debug
-            print(f"DEBUG Cognito - user_info completo: {user_info}")
-            print(f"DEBUG Cognito - user_name extraído: '{user_name}'")
-            
             user_data = {
                 'username': username,
                 'name': user_name,
@@ -92,10 +79,6 @@ class CognitoAuth:
                 'groups': groups,
                 'user_info': user_info
             }
-
-            # DEBUG
-            # DEBUG - Verificar user_data
-            print(f"DEBUG Cognito - user_data['name'] final: '{user_data['name']}'")
             
             return True, user_data, None
             

@@ -1,36 +1,41 @@
-# Sistema de Almacenamiento Centralizado en AWS S3
+# CNDD Project - Sistema de Gestión de Archivos S3
 
-Proyecto de práctica profesional desarrollado para la asignatura de Cloud Computing.
+Sistema de almacenamiento centralizado en AWS con control de acceso multi-rol y auditoría completa.
 
-## Descripción
+**Proyecto de práctica profesional** - Cloud Computing  
+**Autor:** Luis Eduardo Ayala Rayas | Luis Martel  
+**Institución:** ESIT - Estancia Profesional  
+**Semestre:** 03-25
 
-Este proyecto implementa un sistema de gestión documental empresarial usando servicios de AWS. La idea es simular cómo una empresa podría gestionar sus archivos de forma segura y organizada en la nube, con diferentes niveles de acceso según el departamento.
+---
 
-El sistema permite subir, descargar y gestionar archivos en Amazon S3, con control de acceso basado en roles y seguimiento completo de actividad.
+## 📖 Descripción
 
-## Características principales
+Este proyecto implementa un sistema empresarial de gestión documental usando servicios de AWS. Simula cómo una organización puede gestionar archivos de forma segura en la nube, con diferentes niveles de acceso según departamentos y roles.
 
-- **Autenticación segura** con Amazon Cognito
-- **Control de acceso granular** - Cada usuario solo puede hacer lo que su rol permite
-- **Tres niveles de seguridad** - Documentos públicos, proyectos internos y recursos humanos
-- **Auditoría completa** - Todos los accesos y modificaciones quedan registrados
-- **Búsqueda avanzada** - Encuentra archivos rápidamente con OpenSearch
-- **Versionado automático** - Se guardan versiones anteriores de los archivos
+**Características principales:**
+- ✅ Autenticación segura con AWS Cognito
+- ✅ 5 roles de usuario con permisos granulares
+- ✅ Gestión completa de archivos (upload, download, delete)
+- ✅ 4 buckets S3 con diferentes niveles de seguridad
+- ✅ Auditoría completa con CloudTrail + OpenSearch
+- ✅ Interfaz web moderna con Reflex
 
-## Roles de usuario
+---
 
-El sistema tiene 5 tipos de usuarios diferentes:
+## 👥 Roles de Usuario
 
-| Rol | Permisos |
-|-----|----------|
-| **Solo Lectura** | Puede ver la lista de archivos y sus propiedades, pero no descargar el contenido |
-| **Solo Carga** | Puede subir archivos nuevos, pero no ver qué hay en el sistema |
-| **Solo Descarga** | Puede ver y descargar archivos, pero no modificarlos |
-| **Lectura y Escritura** | Puede ver, descargar, subir y eliminar archivos |
-| **Admin** | Acceso completo + panel de administración con logs |
+| Rol | Buckets | Listar | Subir | Descargar | Eliminar | Admin |
+|-----|---------|--------|-------|-----------|----------|-------|
+| **Admin** | Todos (4) | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Lectura-Escritura** | Pública, Proyectos | ✅ | ✅ | ✅ | ✅ | ❌ |
+| **Solo-Lectura** | Pública | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Solo-Carga** | Pública, Proyectos | ✅ | ✅ | ❌ | ❌ | ❌ |
+| **Solo-Descarga** | Pública, Proyectos | ✅ | ❌ | ✅ | ❌ | ❌ |
 
-## Arquitectura
+---
 
+## 🏗️ Arquitectura
 ```
 ┌─────────────┐
 │  Usuario    │
@@ -38,210 +43,259 @@ El sistema tiene 5 tipos de usuarios diferentes:
        │
        ▼
 ┌─────────────────┐
-│ Amazon Cognito  │  ◄── Autenticación
+│ Amazon Cognito  │  ◄── Autenticación + Autorización
 └────────┬────────┘
          │
          ▼
     ┌────────┐
-    │ Roles  │  ◄── Control de acceso
+    │ Roles  │  ◄── Control de acceso (IAM)
     │  IAM   │
     └────┬───┘
          │
          ▼
 ┌─────────────────┐
 │   Amazon S3     │  ◄── Almacenamiento
-│  - Pública      │
-│  - Proyectos    │
-│  - RRHH         │
+│  - cndd-publica      │
+│  - cndd-proyectos    │
+│  - cndd-rrhh         │
+│  - cndd-logs         │
 └────────┬────────┘
          │
          ▼
     ┌───────────┐
-    │CloudTrail │  ◄── Auditoría
+    │CloudTrail │  ◄── Auditoría de eventos
+    │  + Lambda │
     └─────┬─────┘
           │
           ▼
     ┌────────────┐
-    │ OpenSearch │  ◄── Búsqueda
+    │ OpenSearch │  ◄── Búsqueda y análisis de logs
     └────────────┘
 ```
 
-## Tecnologías utilizadas
+---
 
-**Cloud:**
-- Amazon S3 (almacenamiento)
-- Amazon Cognito (autenticación)
-- AWS IAM (permisos)
-- CloudTrail (logs)
-- OpenSearch (búsqueda)
-- Lambda (procesamiento)
+## 🚀 Instalación
 
-**Desarrollo:**
-- Python 3.x
-- Reflex (framework web)
-- Boto3 (SDK de AWS)
+### Prerrequisitos
 
-## Configuración del proyecto
-
-### Requisitos previos
-
-- Python 3.8 o superior
-- Cuenta de AWS con acceso a consola
-- Git
+- Python 3.9+
 - AWS CLI configurado
+- Node.js 16+ (para Reflex)
+- Cuenta AWS activa
 
-### Instalación
+### Pasos de instalación
 
-1. Clonar el repositorio:
+1. **Clonar el repositorio:**
 ```bash
 git clone https://github.com/ayalasofia0-ops/ESIT-Cloud-SN-8.git
 cd ESIT-Cloud-SN-8
 ```
 
-2. Crear entorno virtual:
+2. **Crear entorno virtual:**
 ```bash
-python -m venv venv
-source venv/bin/activate  # En Windows: venv\Scripts\activate
+python -m venv esit
+esit\Scripts\activate  # Windows
+source esit/bin/activate  # Linux/Mac
 ```
 
-3. Instalar dependencias:
+3. **Instalar dependencias:**
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Configurar variables de entorno:
+4. **Configurar variables de entorno:**
+
+Crea un archivo `.env` en la raíz con:
+```env
+# AWS General
+AWS_REGION=us-east-2
+
+# Cognito
+COGNITO_USER_POOL_ID=us-east-2_XXXXXXXXX
+COGNITO_CLIENT_ID=XXXXXXXXXXXXXXXXXXXXXXXXXX
+COGNITO_IDENTITY_POOL_ID=us-east-2:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+
+# S3 Buckets
+BUCKET_PUBLICA=cndd-publica
+BUCKET_PROYECTOS=cndd-proyectos
+BUCKET_RRHH=cndd-rrhh
+BUCKET_LOGS=cndd-logs
+
+# OpenSearch
+OPENSEARCH_ENDPOINT=search-cndd-opensearch-xxxxx.us-east-2.es.amazonaws.com
+OPENSEARCH_INDEX_NAME=cloudtrail-logs
+OPENSEARCH_MASTER_USER=admin
+OPENSEARCH_MASTER_PASSWORD=tu-password-segura
+```
+
+5. **Ejecutar la aplicación:**
 ```bash
-cp .env.example .env
-# Editar .env con tus credenciales de AWS
-```
-
-5. Generar archivos de configuración:
-```bash
-python generate_configs.py
-```
-
-## Configuración de AWS
-
-El proyecto incluye un script que genera automáticamente todas las configuraciones necesarias para AWS. Solo necesitas:
-
-1. Tener una cuenta de AWS activa
-2. Configurar AWS CLI con tus credenciales
-3. Editar el archivo `.env` con tus IDs y credenciales
-4. Ejecutar `python generate_configs.py`
-
-Los archivos generados se guardan en `aws-config/` y están listos para aplicarse con AWS CLI.
-
-### Aplicar configuraciones
-
-```bash
-# Ejemplo para crear buckets
-aws s3api create-bucket --bucket cndd-publica --region us-east-2
-
-# Aplicar políticas
-aws iam create-policy --policy-name CNDD-Admin --policy-document file://aws-config/policies/policy-admin.json
-
-# Y así sucesivamente...
-```
-
-Consulta la documentación en `docs/SETUP.md` para instrucciones detalladas.
-
-## Medidas de seguridad implementadas
-
-- ✅ Cifrado en tránsito (HTTPS obligatorio)
-- ✅ Cifrado en reposo (AES-256)
-- ✅ Versionado de objetos (histórico de cambios)
-- ✅ Lifecycle policies (archivado automático)
-- ✅ Logging completo de accesos
-- ✅ Principio de mínimo privilegio
-- ✅ Autenticación multi-factor (opcional)
-- ✅ Políticas de bucket restrictivas
-
-## Estructura del proyecto
-
-```
-.
-├── aws-config/              # Configuraciones de AWS
-│   ├── policies/           # Políticas IAM
-│   ├── lifecycle/          # Reglas de ciclo de vida
-│   ├── logging/            # Configuración de logs
-│   ├── cognito/            # Configuración de Cognito
-│   ├── opensearch/         # Configuración de OpenSearch
-│   ├── cloudtrail/         # Configuración de CloudTrail
-│   └── lambda/             # Funciones Lambda
-├── proyecto-s3-cndd/       # Aplicación web
-│   ├── config/             # Configuración de la app
-│   ├── services/           # Lógica de negocio
-│   ├── components/         # Componentes UI
-│   └── pages/              # Páginas de la app
-├── scripts/                # Scripts de utilidad
-├── docs/                   # Documentación
-├── .env.example           # Plantilla de variables de entorno
-├── generate_configs.py    # Generador de configuraciones
-└── README.md              # Este archivo
-```
-
-## Uso
-
-### Iniciar la aplicación
-
-```bash
-cd proyecto-s3-cndd
 reflex run
 ```
 
-La aplicación estará disponible en `http://localhost:3000`
-
-### Probar roles
-
-Puedes usar el script de pruebas para verificar que cada rol funciona correctamente:
-
-```bash
-python scripts/test_roles_s3.py
+6. **Acceder:**
+```
+http://localhost:3000
 ```
 
-Esto genera un reporte HTML mostrando qué operaciones puede realizar cada rol.
+---
 
-## Costos estimados
+## 📖 Uso
 
-Para un uso de desarrollo/demostración:
-- S3: ~$0.50/mes (primeros 5GB gratis)
-- Cognito: Gratis (hasta 50,000 usuarios)
-- CloudTrail: ~$2/mes
-- OpenSearch: ~$15/mes (instancia t3.small)
+### Iniciar sesión
 
-**Total aproximado: $17-20/mes**
+- **URL:** http://localhost:3000/login
+- **Email:** Tu email configurado en Cognito
+- **Password:** Tu contraseña
 
-Se recomienda apagar OpenSearch cuando no se use para reducir costos.
+### Funcionalidades por rol
 
-## Problemas conocidos
+**Todos los usuarios:**
+- Dashboard personalizado con nombre
+- Ver archivos en buckets permitidos
+
+**Roles con permisos de carga:**
+- Subir archivos (con diálogo de confirmación)
+
+**Roles con permisos de descarga:**
+- Descargar archivos (descarga automática)
+
+**Roles con permisos de eliminación:**
+- Eliminar archivos (con confirmación)
+
+**Solo Admin:**
+- Crear usuarios con nombre completo
+- Ver logs de CloudTrail en tiempo real
+- Acceso a todos los buckets
+
+---
+
+## 🔐 Seguridad
+
+### Implementado:
+
+- ✅ Cifrado en tránsito (HTTPS)
+- ✅ Cifrado en reposo (AES-256)
+- ✅ Versionado de objetos
+- ✅ Lifecycle policies
+- ✅ Auditoría completa con CloudTrail
+- ✅ Principio de mínimo privilegio (IAM)
+- ✅ URLs pre-firmadas con expiración (5 min)
+- ✅ Logout seguro (invalida tokens)
+
+---
+
+## 🛠️ Tecnologías
+
+**AWS Cloud:**
+- Amazon S3 (almacenamiento)
+- Amazon Cognito (autenticación)
+- AWS IAM (control de acceso)
+- CloudTrail (auditoría)
+- AWS Lambda (procesamiento)
+- OpenSearch (búsqueda de logs)
+
+**Desarrollo:**
+- Python 3.11
+- Reflex 0.8.26 (framework web)
+- boto3 1.42.17 (AWS SDK)
+- opensearch-py 3.1.0
+
+---
+
+## 📂 Estructura del Proyecto
+```
+ESIT-Cloud-SN-8/
+├── .env                    # Variables de entorno
+├── rxconfig.py             # Configuración de Reflex
+├── requirements.txt        # Dependencias Python
+├── README.md              # Este archivo
+├── CNDD_Project/          # Aplicación principal
+│   ├── CNDD_Project.py    # App Reflex
+│   ├── state.py           # Estado global
+│   ├── pages/             # Páginas de la app
+│   │   ├── login.py       # Autenticación
+│   │   ├── dashboard.py   # Panel principal
+│   │   ├── files.py       # Gestión de archivos
+│   │   └── admin.py       # Panel admin
+│   ├── components/        # Componentes reutilizables
+│   │   └── navbar.py      # Barra de navegación
+│   └── utils/             # Utilidades
+│       ├── aws_cognito.py # Autenticación Cognito
+│       ├── s3_manager.py  # Operaciones S3
+│       └── opensearch_client.py  # Cliente OpenSearch
+├── aws_config/            # Configuraciones AWS
+│   ├── policies/          # Políticas IAM
+│   ├── cognito/           # Config Cognito
+│   ├── cloudtrail/        # Config CloudTrail
+│   └── lambda/            # Funciones Lambda
+├── scripts/               # Scripts de automatización
+└── docs/                  # Documentación adicional
+```
+
+---
+
+## 💰 Costos Estimados (AWS)
+
+Para uso de desarrollo/demostración:
+
+| Servicio | Costo mensual |
+|----------|---------------|
+| S3 | ~$0.50 (primeros 5GB gratis) |
+| Cognito | Gratis (hasta 50,000 usuarios) |
+| CloudTrail | ~$2.00 |
+| OpenSearch | ~$15.00 (instancia t3.small) |
+| Lambda | Gratis (nivel gratuito) |
+| **TOTAL** | **~$17-20/mes** |
+
+💡 **Tip:** Apagar OpenSearch cuando no se use para reducir costos.
+
+---
+
+## ⚠️ Problemas Conocidos
 
 - OpenSearch tarda ~15 minutos en iniciar la primera vez
-- Los logs de CloudTrail pueden tardar hasta 15 minutos en aparecer
-- Cognito requiere verificación de email (revisar spam)
+- Los logs de CloudTrail pueden tardar hasta 15 minutos en aparecer en OpenSearch
+- Cognito requiere verificación de email (revisar spam si no llega)
+- El primer `reflex run` tarda 3-5 minutos instalando Node.js/npm
 
-## Próximas mejoras
+---
+
+## 🔮 Próximas Mejoras
 
 - [ ] Compartir archivos entre usuarios
 - [ ] Notificaciones por email
-- [ ] Vista previa de archivos
+- [ ] Vista previa de archivos (PDF, imágenes)
+- [ ] Barra de progreso en uploads
+- [ ] Paginación en lista de archivos
+- [ ] Búsqueda avanzada por fechas en logs
 - [ ] App móvil
-- [ ] Integración con Office 365
 
-## Autor
+---
 
-**Luis Eduardo Ayala Rayas**  
-Estudiante de Ingeniería en Sistemas  
+## 👨‍💻 Autores
+
+**Luis Enrique Muñoz Martel | Luis Martel** \
+**Karla Sofia Ayala Quijada | Karla Ayala**\
+**Edwin Fernando Sanchez Pineda | Edwin Pineda**\
+**Melvin Omar Juarez Rodriguez | Melvin Juarez**  
+Estudiantes de Tecnico Superior en Servicios en la Nube  
 ESIT - Estancia Profesional  
 Semestre: 03-25
 
-## Agradecimientos
+---
 
-Gracias al profesor y a mis compañeros por el apoyo durante el desarrollo de este proyecto.
+## 🙏 Agradecimientos
 
-## Licencia
+Gracias al tutor y compañeros por el apoyo durante el desarrollo de este proyecto.
+
+---
+
+## 📄 Licencia
 
 Este proyecto es de código abierto para fines educativos.
 
 ---
 
-**Nota:** Este proyecto fue desarrollado con fines académicos. No se recomienda usar en producción sin una revisión exhaustiva de seguridad.
+**⚠️ Nota:** Este proyecto fue desarrollado con fines académicos. No se recomienda usar en producción sin una revisión exhaustiva de seguridad.

@@ -37,7 +37,6 @@ class S3Manager:
         """
         Obtener buckets disponibles según el rol del usuario.
         """
-        print(f"DEBUG - S3Manager recibió rol: '{role}'")
         buckets = []
         
         if role == 'admin':
@@ -195,9 +194,15 @@ class S3Manager:
             Tuple (éxito, url, mensaje_error)
         """
         try:
+            filename = object_key.split('/')[-1]
+
             url = self.s3_client.generate_presigned_url(
                 'get_object',
-                Params={'Bucket': bucket_name, 'Key': object_key},
+                Params={
+                    'Bucket': bucket_name, 
+                    'Key': object_key,
+                    'ResponseContentDisposition': f'attachment; filename="{filename}"'
+                },
                 ExpiresIn=expiration
             )
             return True, url, None

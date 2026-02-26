@@ -31,13 +31,6 @@ class OpenSearchClient:
         if not self.master_password:
             raise ValueError("OPENSEARCH_MASTER_PASSWORD no está configurado en .env")
         
-        # DEBUG: Mostrar las credenciales (quitar después de probar)
-        print(f"DEBUG - Endpoint: {self.endpoint}")
-        print(f"DEBUG - Master User: {self.master_user}")
-        print(f"DEBUG - Password length: {len(self.master_password)} caracteres")
-        if self.master_password:
-            print(f"DEBUG - Password starts with: {self.master_password[:3]}...")
-        
         # Cliente OpenSearch con autenticación básica (master user)
         try:
             self.client = OpenSearch(
@@ -51,7 +44,7 @@ class OpenSearchClient:
             
             # Verificar conexión
             info = self.client.info()
-            print(f"✅ Conectado a OpenSearch: {info['version']['number']}")
+#            print(f"✅ Conectado a OpenSearch: {info['version']['number']}")
             
         except Exception as e:
             raise ValueError(f"Error conectando a OpenSearch: {str(e)}")

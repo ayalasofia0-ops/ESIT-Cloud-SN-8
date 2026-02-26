@@ -30,5 +30,29 @@ class GlobalState(rx.State):
         self.username = ""
         self.email = ""
         self.role = ""
-        self.access_token = ""
+
+
+        if self.access_token:
+            try: 
+                import boto3
+                import os
+                from dotenv import load_dotenv
+
+                load_dotenv()
+
+                client = boto3.client(
+                    'cognito-idp',
+                    region_name = os.getenv('AWS_REGION')
+                )
+
+                #Cerrar sesion global en cognito
+                client.global_sign_out(
+                    AccessToken = self.access_token
+                )
+
+            except Exception as e:
+                print(f'Error Cerrando Sesion en Cognito: {e}')
+
+        self.access_token = ''                
+
         return rx.redirect("/login")

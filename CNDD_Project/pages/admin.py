@@ -45,6 +45,10 @@ class AdminState(rx.State):
         
         # Obtener estado global
         global_state = await self.get_state(GlobalState)
+
+        #Verificar autenticacion
+        if not global_state.is_authenticated:
+            return rx.redirect('/login')
         
         # Sincronizar datos del usuario
         self.username = global_state.username or "admin@ejemplo.com"
