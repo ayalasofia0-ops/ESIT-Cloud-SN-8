@@ -19,11 +19,12 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && \
     rm -rf /var/lib/apt/lists/*
 
-# Copiar requirements
+# Copiar requirements primero (para cachear dependencias)
 COPY requirements.txt .
 
 # Instalar dependencias Python
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
 # Copiar todo el código
 COPY . .
@@ -36,5 +37,5 @@ ENV NODE_ENV=production
 # Exponer puerto
 EXPOSE 8000
 
-# Comando de inicio
+# Inicializar Reflex y ejecutar
 CMD ["sh", "-c", "reflex init && reflex run --env prod --backend-only --loglevel info"]
