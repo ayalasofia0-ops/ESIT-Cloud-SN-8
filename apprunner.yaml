@@ -2,6 +2,9 @@ version: 1.0
 runtime: python311
 build:
   commands:
+    pre-build:
+      - curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+      - apt-get install -y nodejs unzip
     build:
       - python3.11 -m pip install --upgrade pip
       - python3.11 -m pip install -r requirements.txt
@@ -10,7 +13,6 @@ run:
   command: sh -c "reflex init && reflex run --env prod --backend-only --loglevel info"
   network:
     port: 8000
-    env: REFLEX_BACKEND_PORT
   env:
     - name: PYTHONUNBUFFERED
       value: "1"
