@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: cndd-project
+    runtime: python
+    buildCommand: pip install -r requirements.txt && reflex init
+    startCommand: reflex run --env prod --backend-only --loglevel info
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: AWS_REGION
+        value: us-east-2
+      - key: COGNITO_USER_POOL_ID
+        value: us-east-2_K7P0oSbDg
+      - key: COGNITO_CLIENT_ID
+        value: 5n8106brar4aa4n8iqbi4ttegr
+      - key: BUCKET_PUBLICA
+        value: cndd-publica
+      - key: BUCKET_PROYECTOS
+        value: cndd-proyectos
+      - key: BUCKET_RRHH
+        value: cndd-recursoshumanos
+      - key: BUCKET_LOGS
+        value: cndd-logs
+      - key: OPENSEARCH_ENDPOINT
+        value: search-cndd-opensearch-oxehl7ghlx4rhguwujzygo6viq.us-east-2.es.amazonaws.com
+      - key: OPENSEARCH_INDEX_NAME
+        value: cloudtrail-logs
+      - key: OPENSEARCH_MASTER_USER
+        value: admin
