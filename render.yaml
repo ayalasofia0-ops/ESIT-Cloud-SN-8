@@ -2,12 +2,9 @@ services:
   - type: web
     name: cndd-project
     runtime: python
-    plan: free  # o starter si prefieres
     buildCommand: pip install -r requirements.txt && reflex init
-    startCommand: reflex run --env prod --backend-only --backend-host 0.0.0.0 --backend-port 8000
+    startCommand: reflex run --env prod
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.9
       - key: AWS_REGION
         value: us-east-2
       - key: COGNITO_USER_POOL_ID
