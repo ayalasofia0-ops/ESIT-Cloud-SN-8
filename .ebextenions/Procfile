@@ -1,1 +1,1 @@
-web: reflex run --env prod --backend-only --loglevel info
+web: sh -c "reflex init && reflex run --env prod --backend-only --loglevel info"
