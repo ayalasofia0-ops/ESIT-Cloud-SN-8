@@ -1,0 +1,16 @@
+version: 1.0
+runtime: python3
+build:
+  commands:
+    build:
+      - pip install --upgrade pip
+      - pip install -r requirements.txt
+run:
+  command: sh -c "reflex init && reflex run --env prod --backend-only --loglevel info"
+  network:
+    port: 8000
+  env:
+    - name: PYTHONUNBUFFERED
+      value: "1"
+    - name: REFLEX_BACKEND_PORT
+      value: "8000"
